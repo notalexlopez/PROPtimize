@@ -61,6 +61,7 @@ class PropulsionGroup(om.Group):
                 'motor_mass',
                 'motor_voltage_in',
                 'motor_current',
+                'motor_peak_current',
             ], 
             promotes_outputs= [
                 'rpm',
@@ -99,7 +100,7 @@ class PropulsionGroup(om.Group):
             promotes_outputs=[
                 "prop_thrust",
                 "prop_power",
-                "prop_thrust_obj"
+                # "prop_thrust_obj"
             ],
         )
 

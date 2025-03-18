@@ -13,14 +13,14 @@ class ElectronicSpeedController(om.ExplicitComponent):
     def setup(self):
         fc = self.options["flight_conds"]
         fm = self.options["flight_missions"]
-        self.add_input('esc_current_in', shape = (fc + 1,fm),units = 'A')
-        self.add_input('esc_voltage_in', shape = (fc + 1,fm), units = 'V')
-        self.add_input("throttle", shape=(fc + 1,fm), desc="takeoff throttle setting")
+        self.add_input('esc_current_in', shape = (fc ,fm),units = 'A')
+        self.add_input('esc_voltage_in', shape = (fc ,fm), units = 'V')
+        self.add_input("throttle", shape=(fc ,fm), desc="takeoff throttle setting")
 
-        self.add_output('esc_efficiency', shape = (fc + 1,fm))
-        self.add_output('esc_voltage_out', shape =(fc + 1 ,fm), units = 'V')
-        self.add_output('esc_current_out', shape = (fc + 1,fm),units = 'A')
-        self.add_output('esc_power', shape = (fc + 1,fm), units = 'W')
+        self.add_output('esc_efficiency', shape = (fc ,fm))
+        self.add_output('esc_voltage_out', shape =(fc  ,fm), units = 'V')
+        self.add_output('esc_current_out', shape = (fc ,fm),units = 'A')
+        self.add_output('esc_power', shape = (fc ,fm), units = 'W')
 
         self.declare_partials('*', '*', method = 'cs')
 

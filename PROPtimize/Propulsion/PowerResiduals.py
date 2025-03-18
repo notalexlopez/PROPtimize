@@ -11,13 +11,13 @@ class PowerResiduals(om.ImplicitComponent):
     def setup(self):
         fc = self.options["flight_conds"]
         fm = self.options["flight_missions"]
-        self.add_input('battery_power', shape = (fc + 1,fm), units = 'W')
-        self.add_input('esc_power', shape = (fc + 1,fm), units = 'W')
-        self.add_input('motor_power', shape = (fc + 1,fm), units = 'W')
-        self.add_input('prop_power', shape = (fc + 1,fm), units = 'W')
+        self.add_input('battery_power', shape = (fc,fm), units = 'W')
+        self.add_input('esc_power', shape = (fc,fm), units = 'W')
+        self.add_input('motor_power', shape = (fc,fm), units = 'W')
+        self.add_input('prop_power', shape = (fc,fm), units = 'W')
 
-        self.add_output('res_current', shape =(fc + 1,fm), units = 'A', val = 30)
-        self.add_residual('power_net', shape = (fc + 1, fm), units = 'W')
+        self.add_output('res_current', shape =(fc,fm), units = 'A', val = 30)
+        self.add_residual('power_net', shape = (fc, fm), units = 'W')
 
         self.declare_partials('*', '*', method = 'cs')
 

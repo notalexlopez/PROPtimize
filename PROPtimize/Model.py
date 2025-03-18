@@ -30,11 +30,12 @@ class PropModel(om.Group):
                 "velocity",
             ],
         )
+
         indeps.add_output("D_prop", units="inch", shape = p, desc="propeller diameter")
         indeps.add_output("pitch", units="deg", shape = p,  desc="propeller pitch")
-        indeps.add_output("throttle", shape = (fc,fm), desc = "throttle setting")
-        indeps.add_output("velocity", shape = (fc,fm), desc = "optimized velocities", units = "m/s")
-
+        indeps.add_output("throttle", shape = (fc ,fm), desc = "throttle setting")
+        indeps.add_output("velocity", shape = (fc ,fm), desc = "optimized velocities", units = "m/s")
+        
         self.add_subsystem(
             "PropulsionGroup",
             PropulsionGroup(),

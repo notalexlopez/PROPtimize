@@ -15,13 +15,13 @@ class Propeller(om.ExplicitComponent):
         p = self.options["props"]
         self.add_input("rho", units="kg/m**3", desc="air density")
         self.add_input("D_prop", units="m", shape = p, desc="propeller diameter")
-        self.add_input("rpm", shape = (fc + 1,fm), units = "rev/s")
-        self.add_input("ct", shape = (fc + 1,fm))
-        self.add_input("cp", shape = (fc + 1,fm))
+        self.add_input("rpm", shape = (fc ,fm), units = "rev/s")
+        self.add_input("ct", shape = (fc ,fm))
+        self.add_input("cp", shape = (fc ,fm))
         self.add_input("num_motors", desc="number of motors")
-        self.add_output("prop_thrust", shape =(fc + 1, fm), units ="N")
-        self.add_output("prop_power", shape = (fc + 1, fm), units = "W")
-        self.add_output('prop_thrust_obj', shape = (fc, fm), units = "N")
+        self.add_output("prop_thrust", shape =(fc , fm), units ="N")
+        self.add_output("prop_power", shape = (fc , fm), units = "W")
+        # self.add_output('prop_thrust_obj', shape = (fc, fm), units = "N")
 
 
         self.declare_partials("*", "*", method="cs")
@@ -35,4 +35,4 @@ class Propeller(om.ExplicitComponent):
         outputs["prop_thrust"] = (rho * n**2 * D**4 * inputs["ct"] * inputs["num_motors"])
         outputs["prop_power"] = (rho * n**3 * D**5 * inputs["cp"])
 
-        outputs["prop_thrust_obj"] = outputs["prop_thrust"][1]
+        # outputs["prop_thrust_obj"] = outputs["prop_thrust"][1]

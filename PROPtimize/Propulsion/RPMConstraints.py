@@ -13,10 +13,10 @@ class RPMConstraints(om.ExplicitComponent):
         fm = self.options["flight_missions"]
         p = self.options["props"]
         self.add_input(
-            "rpm", shape = (fc + 1,fm), units = "rev/min")
+            "rpm", shape = (fc ,fm), units = "rev/min")
         self.add_input("D_prop", units="inch", shape = p, desc="propeller diameter")
 
-        self.add_output("RPM_con", shape=(fc + 1,fm), desc="RPM limit")
+        self.add_output("RPM_con", shape=(fc,fm), desc="RPM limit")
 
         self.declare_partials("*", "*", method="cs")
 

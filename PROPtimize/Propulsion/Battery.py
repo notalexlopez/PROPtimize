@@ -17,10 +17,10 @@ class Battery(om.ExplicitComponent):
         self.add_input('battery_voltage_supply', shape = fm, units = "V") #Running under the assumption that one can replace batteries
         self.add_input('battery_mass', shape = fm, units = "kg")
         self.add_input('battery_resistance', shape = fm, units = 'ohm') 
-        self.add_input('battery_current', shape = (fc + 1 ,fm), units = 'A')
+        self.add_input('battery_current', shape = (fc ,fm), units = 'A')
 
-        self.add_output('battery_voltage_out', shape = (fc + 1,fm), units = 'V')
-        self.add_output('battery_power', shape = (fc + 1,fm), units = 'W')
+        self.add_output('battery_voltage_out', shape = (fc ,fm), units = 'V')
+        self.add_output('battery_power', shape = (fc ,fm), units = 'W')
         self.add_output('nominal_capacity', shape = fm, units = 'A*h')
         self.add_output('battery_energy', shape = fm, units = "W*h",  desc ="individual battery energy")
         

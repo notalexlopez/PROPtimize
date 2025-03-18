@@ -67,10 +67,10 @@ class PropCoefficients(om.ExplicitComponent):
         self.add_input("D_prop", units="m", shape = p, desc="propeller diameter")
         self.add_input("pitch", units="deg", shape = p, desc="propeller pitch")
 
-        self.add_input('rpm', shape = (fc + 1,fm), units = "rev/s")
-        self.add_input('velocity', shape = (fc + 1,fm), units = "m/s")
-        self.add_output('ct', shape = (fc + 1,fm),desc = "thrust coefficients")
-        self.add_output('cp', shape = (fc + 1,fm),desc="power coefficients")
+        self.add_input('rpm', shape = (fc ,fm), units = "rev/s")
+        self.add_input('velocity', shape = (fc ,fm), units = "m/s")
+        self.add_output('ct', shape = (fc ,fm),desc = "thrust coefficients")
+        self.add_output('cp', shape = (fc ,fm),desc="power coefficients")
 
         self.declare_partials('*', '*')
 
