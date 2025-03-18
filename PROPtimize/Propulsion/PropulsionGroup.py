@@ -98,7 +98,8 @@ class PropulsionGroup(om.Group):
             ],
             promotes_outputs=[
                 "prop_thrust",
-                "prop_power"
+                "prop_power",
+                "prop_thrust_obj"
             ],
         )
 

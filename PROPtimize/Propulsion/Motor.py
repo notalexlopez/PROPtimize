@@ -11,11 +11,11 @@ class Motor(om.ExplicitComponent):
         fm = self.options["flight_missions"]
         self.add_input('motor_idle_current', units = 'A')
         self.add_input('motor_mass', units = 'kg' )
-        self.add_input('motor_voltage_in', shape = (fc,fm), units = 'V')
-        self.add_input('motor_current', shape = (fc,fm), units = 'A')
+        self.add_input('motor_voltage_in', shape = (fc + 1,fm), units = 'V')
+        self.add_input('motor_current', shape = (fc + 1,fm), units = 'A')
 
-        self.add_output('rpm', shape = (fc,fm), units = 'rev/min')
-        self.add_output('motor_power', shape = (fc,fm), units = 'W')
+        self.add_output('rpm', shape = (fc + 1,fm), units = 'rev/min')
+        self.add_output('motor_power', shape = (fc + 1,fm), units = 'W')
         self.add_output('motor_kv', units = 'rpm / V')
         self.add_output('motor_resistance', units = 'ohm')
 
@@ -25,7 +25,8 @@ class Motor(om.ExplicitComponent):
 
     def compute(self, inputs, outputs):
 
-        outputs['motor_kv'] = (1.3132 * 120) / (inputs['motor_mass'] + 0.01) # FOR SCORPION MOTORS
+        #outputs['motor_kv'] = (1.3132 * 120) / (inputs['motor_mass'] + 0.01) # FOR SCORPION MOTORS
+        outputs['motor_kv'] = (1.3132 * inputs['motor_current'][0]) / (inputs['motor_mass'] + 0.01) # FOR SCORPION MOTORS
         outputs['motor_resistance'] = (0.0467 * inputs['motor_idle_current'] ** -1.892)
 
         voltage_prop = inputs['motor_voltage_in'] - (inputs['motor_current'] * outputs['motor_resistance'])
