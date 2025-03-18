@@ -20,6 +20,7 @@ class Motor(om.ExplicitComponent):
         self.add_output('motor_power', shape = (fc ,fm), units = 'W')
         self.add_output('motor_kv', units = 'rpm / V')
         self.add_output('motor_resistance', units = 'ohm')
+        self.add_output('current_con', shape = (fc, fm), units = "A")
 
 
         self.declare_partials('*', '*', method = 'cs')
@@ -34,3 +35,5 @@ class Motor(om.ExplicitComponent):
         voltage_prop = inputs['motor_voltage_in'] - (inputs['motor_current'] * outputs['motor_resistance'])
         outputs['rpm'] = outputs['motor_kv'] * voltage_prop 
         outputs['motor_power'] = -inputs['motor_current']**2 * outputs['motor_resistance'] - inputs['motor_idle_current'] * voltage_prop
+
+        outputs["current_con"] = inputs["motor_current"] - inputs["motor_peak_current"]

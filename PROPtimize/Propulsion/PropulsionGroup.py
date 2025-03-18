@@ -67,7 +67,8 @@ class PropulsionGroup(om.Group):
                 'rpm',
                 'motor_power',
                 'motor_kv',
-                'motor_resistance'
+                'motor_resistance',
+                'current_con',
             ]
         )
         

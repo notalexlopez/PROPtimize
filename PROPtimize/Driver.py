@@ -21,17 +21,18 @@ prob.driver.recording_options["record_desvars"] = True
 '''For endurance based optimization, it is recommended to optimize for battery mass, 
 otherwise a standard battery mass of 0.71 kg is added.'''
 
-# prob.model.add_design_var("battery_mass", units = 'kg', lower = .1, upper = 1)
+prob.model.add_design_var("battery_mass", units = 'kg', lower = .1, upper = 1)
 prob.model.add_design_var('motor_idle_current', units = 'A', lower = 1, upper = 3.6)
 prob.model.add_design_var('motor_mass', lower = 0.288, upper = 1.701, units = 'kg')
 prob.model.add_design_var("D_prop", lower=12, upper=23, units="inch")
 prob.model.add_design_var("pitch", lower=3, upper=15, units="deg")
 prob.model.add_design_var("throttle", lower = 0.1, upper = 1)
-prob.model.add_design_var("motor_peak_current", lower = 1, units = "A")
-prob.model.add_design_var("velocity", units = "m/s", lower =1, upper = 35)
+prob.model.add_design_var("motor_peak_current", lower = 1, upper = 225, units = "A") # Limits are based on available motors
+prob.model.add_design_var("velocity", units = "m/s", lower =0, upper = 35)
 
 prob.model.add_objective('prop_thrust', scaler = -1)
 prob.model.add_constraint("RPM_con", upper = 0)
+prob.model.add_constraint("current_con", upper = 0, units = "A")
 
 prob.model_options['*'] = {'flight_conds': 1, "flight_missions": 1, 'props': 1}
 prob.setup(check=True)
@@ -86,3 +87,15 @@ print(f"\nBattery Information:")
 
 print(f"    Nominal capacity: {prob.get_val('nominal_capacity', units = 'A*h')}")
 print(f"    Current {prob.get_val('battery_current', units = 'A')} A")
+
+#TODO: I think there is a local minima at 0 thrust, fixed when adding max current constraint but who knows
+
+# import niceplots #type:ignore
+# import matplotlib.pyplot as plt
+
+# plt.style.use(niceplots.get_style("james-light"))
+# colors = niceplots.get_colors()
+
+# advance_ratio = 
+# fig, ax = plt.subplots()
+# (ct_j, ) = plt.plot()
