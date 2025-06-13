@@ -50,7 +50,6 @@ prob.set_val('motor_idle_current', 0.91, units = 'A')
 prob.set_val('motor_mass', 0.288, units = 'kg')
 prob.set_val('battery_mass', .707, units = 'lb')
 
-prob.set_solver_print(level=-1)
 prob.set_solver_print(level=2, depth=1)
 
 prob.run_driver()
