@@ -40,12 +40,12 @@ prob.setup(check=True)
 prob.set_val("num_motors", 1)
 prob.set_val("battery_voltage_supply", 22.2, units = "V")
 prob.set_val("battery_resistance", 0.05, units = "ohm")
-
+prob.set_val('rho', 1.225, units = 'kg/m**3')
 prob.set_val('motor_peak_current', 120, units = "A")
 prob.set_val("D_prop", 16, units = "inch")
 prob.set_val("pitch", 12, units= "deg")
 prob.set_val("throttle", 0.8)
-prob.set_val("velocity",  45, units = "ft/s")
+prob.set_val("velocity",  0, units = "ft/s")
 prob.set_val('motor_idle_current', 0.91, units = 'A')
 prob.set_val('motor_mass', 0.288, units = 'kg')
 prob.set_val('battery_mass', .707, units = 'lb')
@@ -71,6 +71,7 @@ print(f"\nPropeller Information:")
 
 print(f"    Propeller Diameter: {prob.get_val('D_prop', units='inch')} in")
 print(f"    Propeller Pitch: {prob.get_val('pitch', units='deg')} degrees")
+print(f"thrust coefficient: {prob.get_val('ct')}, power coefficient: {prob.get_val('cp')}")
 
 
 print(f"\nMotor Information:")

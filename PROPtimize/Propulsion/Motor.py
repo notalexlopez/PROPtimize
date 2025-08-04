@@ -29,8 +29,8 @@ class Motor(om.ExplicitComponent):
     def compute(self, inputs, outputs):
 
         #outputs['motor_kv'] = (1.3132 * 120) / (inputs['motor_mass'] + 0.01) # FOR SCORPION MOTORS
-        outputs['motor_kv'] = (1.3132 * inputs['motor_peak_current']) / (inputs['motor_mass'] + 0.01) # FOR SCORPION MOTORS
-        outputs['motor_resistance'] = (0.0467 * inputs['motor_idle_current'] ** -1.892)
+        outputs['motor_kv'] = 420 #(1.3132 * inputs['motor_peak_current']) / (inputs['motor_mass'] + 0.01) # FOR SCORPION MOTORS
+        outputs['motor_resistance'] = 0.032 #(0.0467 * inputs['motor_idle_current'] ** -1.892)
 
         voltage_prop = inputs['motor_voltage_in'] - (inputs['motor_current'] * outputs['motor_resistance'])
         outputs['rpm'] = outputs['motor_kv'] * voltage_prop 

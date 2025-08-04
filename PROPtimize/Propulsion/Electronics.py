@@ -32,5 +32,7 @@ class ElectronicSpeedController(om.ExplicitComponent):
         outputs['esc_efficiency'] = a * (1 - 1 / (1 + b*inputs['throttle']**c))
 
         outputs['esc_voltage_out'] = inputs['esc_voltage_in'] * inputs['throttle'] * outputs['esc_efficiency']
-        outputs['esc_current_out'] = inputs['esc_current_in'] / inputs['throttle']
+        outputs['esc_current_out'] = inputs['esc_current_in'] #/ inputs['throttle']
+        # print(outputs['esc_current_out'])
         outputs['esc_power'] = (outputs['esc_efficiency'] - 1) * inputs['esc_current_in'] * inputs['esc_voltage_in']
+        #[[ 0.11335863  1.57499027  7.4172895  20.02786462 39.29355908 48.55816942]]
