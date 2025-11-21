@@ -58,15 +58,15 @@ class PropulsionGroup(om.Group):
             Motor(),
             promotes_inputs= [
                 'motor_idle_current',
-                'motor_mass',
+                'motor_kv',
                 'motor_voltage_in',
                 'motor_current',
-                'motor_peak_current',
+                'max_cont_current',
             ], 
             promotes_outputs= [
                 'rpm',
                 'motor_power',
-                'motor_kv',
+                'motor_mass',
                 'motor_resistance',
                 'current_con',
             ]

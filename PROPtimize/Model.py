@@ -28,6 +28,7 @@ class PropModel(om.Group):
                 "pitch",
                 "throttle",
                 "velocity",
+                "motor_kv",
             ],
         )
 
@@ -35,6 +36,7 @@ class PropModel(om.Group):
         indeps.add_output("pitch", units="deg", shape = p,  desc="propeller pitch")
         indeps.add_output("throttle", shape = (fc ,fm), desc = "throttle setting")
         indeps.add_output("velocity", shape = (fc ,fm), desc = "optimized velocities", units = "m/s")
+        indeps.add_output("motor_kv", units = 'rpm / V', shape = 1, desc = "motor kv")
         
         self.add_subsystem(
             "PropulsionGroup",

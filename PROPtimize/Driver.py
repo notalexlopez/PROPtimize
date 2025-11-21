@@ -23,11 +23,11 @@ otherwise a standard battery mass of 0.71 kg is added.'''
 
 prob.model.add_design_var("battery_mass", units = 'kg', lower = .1, upper = 1)
 prob.model.add_design_var('motor_idle_current', units = 'A', lower = 1, upper = 3.6)
-prob.model.add_design_var('motor_mass', lower = 0.288, upper = 1.701, units = 'kg')
+prob.model.add_design_var('motor_kv', units = 'rpm / V', lower = 155, upper = 540)
 prob.model.add_design_var("D_prop", lower=12, upper=23, units="inch")
 prob.model.add_design_var("pitch", lower=3, upper=15, units="deg")
 prob.model.add_design_var("throttle", lower = 0.1, upper = 1)
-prob.model.add_design_var("motor_peak_current", lower = 1, upper = 225, units = "A") # Limits are based on available motors
+prob.model.add_design_var("max_cont_current", lower = 70, upper = 141, units = "A") # Limits are based on available motors
 prob.model.add_design_var("velocity", units = "m/s", lower =0, upper = 35)
 
 prob.model.add_objective('prop_thrust', scaler = -1)
@@ -41,7 +41,7 @@ prob.set_val("num_motors", 1)
 prob.set_val("battery_voltage_supply", 22.2, units = "V")
 prob.set_val("battery_resistance", 0.05, units = "ohm")
 prob.set_val('rho', 1.225, units = 'kg/m**3')
-prob.set_val('motor_peak_current', 120, units = "A")
+prob.set_val('max_cont_current', 120, units = "A")
 prob.set_val("D_prop", 16, units = "inch")
 prob.set_val("pitch", 12, units= "deg")
 prob.set_val("throttle", 0.8)
@@ -78,7 +78,7 @@ print(f"\nMotor Information:")
 
 print(f"    KV{prob.get_val('motor_kv', units = 'rpm/V')} rpm/V")
 print(f"    Idle Current{prob.get_val('motor_idle_current', units = 'A')} A")
-print(f"    Peak Current{prob.get_val('motor_peak_current', units = 'A')} A")
+print(f"    Max Cont Current{prob.get_val('max_cont_current', units = 'A')} A")
 print(f"    Mass{prob.get_val('motor_mass', units = 'kg')} kg")
 print(f"    Resistance: {prob.get_val('motor_resistance', units ='ohm')}")
 
